@@ -1,37 +1,30 @@
 <!DOCTYPE html>
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Sign up</title>
-  </head>
+    <link href="css/auth.css" rel="stylesheet" type="text/css">
+</head>
 
-  <body>
-    <form action="login/process" method="post">
-      <p title="Login form">Sign up</p>
+<body>
+<div class="form" action="login/process" method="post>
+      <h1>Вход</h1>
       <div class="group">
         <label for="">Login</label>
-        <input name="login" />
-      </div>
+          <input type="text" placeholder="Логин" name="login">
+       </div>
 
       <div class="group">
-        <label for="">Password</label>
-        <input name="password" type="password" />
-        <div class="error">${error_login_placeholder}</div>
-      </div>
-
-
+         <input type="password" name="password" placeholder="Пароль"></div>
+      <div class="error">${error_login_placeholder}</div>
       <div class="group">
-        <button class="button">Confirm</button>
+      <input type="submit" class='button' placeholder="Войти">
       </div>
-    </form>
+      <script src="js/auth.js" async></script>
+</div>
+<img class="image" src="img/intresting.jpg" alt="заставка">
 
-    <form action="registration" method="get">
-      <div>
-        <button class="button">registration</button>
-      </div>
-    </form>
-
-  </body>
+</body>
 </html>
