@@ -4,6 +4,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <title>Гигамаркет роботов</title>
     <head>
       <meta charset="UTF-8">
@@ -13,6 +14,14 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script defer type="module" src="js/auth.js"></script>
     </head>
+=======
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/modal.css">
+    <link rel="stylesheet" type="text/css" href="css/auth.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script defer type="module" src="js/auth.js"></script>
+>>>>>>> 2e295d2e8783b860def15bdd53bffc12976ddf32
   </head>
   <body>
   <div class="container">
@@ -24,10 +33,16 @@
         <li class="list"><a href="catalog.jsp">Каталог</a></li>
         <li class="list"><a href="index.jsp">Главная</a></li>
       </ul>
+<<<<<<< HEAD
       <img class="logo" src="icon/rob.jpeg" alt="logo_robot">
     </div>
   </div>
   <d
+=======
+      <img class="logo" src="icon/rob1.jpeg" alt="logo_robot">
+    </div>
+  </div>
+>>>>>>> 2e295d2e8783b860def15bdd53bffc12976ddf32
     <p>
       ${message}!
     </p>
