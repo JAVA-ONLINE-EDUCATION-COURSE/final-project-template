@@ -13,7 +13,7 @@
     height: 230px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-image: url("../../img/фоновое изображение.jpg");
+    background-image: url("../img/фоновое изображение.jpg");
     list-style-type: none;
     font: 19px "URW Chancery L", cursive;
 }
@@ -25,7 +25,6 @@
     /*display: block;*/
     height: 230px;
     width: 100%;
-    background-image: url("../../img/фоновое изображение.jpg");
     list-style-type: none;
     font: 19px "URW Chancery L", cursive;
 }

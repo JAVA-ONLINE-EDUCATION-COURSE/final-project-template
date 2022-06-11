@@ -12,8 +12,8 @@
     <!-- Меню -->
     <div class = "header">
         <ul class="menu">
-            <li><a href="contacts.html">Контакты</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="contacts.jsp">Контакты</a></li>
+            <li><a href="catalog.jsp">Каталог</a></li>
             <li><a href="index.html">Главная</a></li>
         </ul>
         <img class="logo" src="../icon/rob.jpeg" >

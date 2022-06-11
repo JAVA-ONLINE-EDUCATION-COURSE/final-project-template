@@ -3,6 +3,9 @@ package com.epam.rd.izh.controller;
 import com.epam.rd.izh.entity.AuthorizedUser;
 import com.epam.rd.izh.repository.UserRepository;
 import javax.validation.Valid;
+
+import com.epam.rd.izh.service.UserDetailsServiceMapper;
+import org.apache.tomcat.util.descriptor.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Date;
 
 /**
  * В аргументы контроллеров, которые обрабатывают запросы, можно указать дополнительные входные параметры: Например:
@@ -29,30 +34,42 @@ public class AuthenticationController {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  /**
-   * Метод, отвечающий за логику авторизации пользователя.
-   * /login - определяет URL, по которому пользователь должен перейти, чтобы запустить данный метод-обработчик.
-   */
-  @GetMapping("/login")
-  public String login(Model model, @RequestParam(required = false) String error) {
-    if (error != null) {
-      /**
-       * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
-       * Добавляется String "invalid login or password!", с ключем "error_login_placeholder".
-       * При создании View шаблона плейсхолдер ${error_login_placeholder} будет заменен на переданное значение.
-       *
-       * В класс Model можно передавать любые объекты, необходимые для генерации View.
-       */
-      model.addAttribute("error_login_placeholder", "invalid login or password!");
-    }
-    /**
-     * Контроллер возвращает String название JSP страницы.
-     * В application.properties есть следующие строки:
-     * spring.mvc.view.prefix=/WEB-INF/pages/
-     * spring.mvc.view.suffix=.jsp
-     * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
-     */
+  private UserDetailsServiceMapper userService;
+
+  @Autowired
+  public void UserController(UserDetailsServiceMapper userService) {
+    this.userService = userService;
+  }
+
+  @GetMapping(value = "/error")
+  public String accessDenied() {
+    return "error";
+  }
+
+  @GetMapping(value = {"/", "/login"})
+  public String home() {
     return "login";
+  }
+
+  @GetMapping(value = "/registration")
+  public String registrationPage() {
+    return "registration";
+  }
+
+  @PostMapping(value = "/appRegistration")
+  public String registrationUser(Model model,
+                                 @RequestParam String username,
+                                 @RequestParam String password,
+                                 @RequestParam String role,
+                                 @RequestParam Date birhday) {
+    AuthorizedUser user = new AuthorizedUser();
+    boolean flag = userService.save(user);
+    if (flag) {
+      model.addAttribute(Constants.MESSAGE, Constants.YOU_ARE_REGISTERED);
+      return "login";
+    }
+    model.addAttribute(Constants.MESSAGE, Constants.USER_EXISTS);
+    return "registration";
   }
 
   /**

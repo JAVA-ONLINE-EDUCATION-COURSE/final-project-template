@@ -1,5 +1,7 @@
 package com.epam.rd.izh.entity;
 
+import java.util.Date;
+
 /**
  * Сущность пользователя, содержит данные(credentials), необходимые для авторизации в Spring Web приложении; Может
  * быть использована как часть бизнес логики приложеняи, например сотрудник больницы, где role определяет его
@@ -9,11 +11,24 @@ package com.epam.rd.izh.entity;
  * добавить в код приложения сервис, генерирующий UUID: 'private UUID id = randomUUID();' и проверяющий его на
  * наличие совпадений с уже существующими.
  */
-
+@Entity
+@Table(name = "customs")
 public class AuthorizedUser {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = "customer_firstName")
   private String login;
+
+  @NotNull
+  @Column(name = "password")
   private String password;
+
+  @Column(name = "birthday")
+  private Date birthday;
+
 
   /**
    * Определяет GrantedAuthority пользователя. Может быть колелкцией, например Set<Strings> если логика приложения
@@ -48,7 +63,13 @@ public class AuthorizedUser {
     this.role = role;
   }
 
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
 
+  public Date getBirthday() {
+    return birthday;
+  }
 
   /**
    * Ниже представлена простая реализация паттерна builder;
@@ -68,6 +89,11 @@ public class AuthorizedUser {
 
   public AuthorizedUser role(String role) {
     this.setRole(role);
+    return this;
+  }
+
+  public AuthorizedUser birthday(Date date) {
+    this.setBirthday(date);
     return this;
   }
 

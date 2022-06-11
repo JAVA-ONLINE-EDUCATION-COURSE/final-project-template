@@ -47,5 +47,4 @@ public class UserDetailsServiceMapper implements UserDetailsService {
         roles
     );
   }
-
 }
