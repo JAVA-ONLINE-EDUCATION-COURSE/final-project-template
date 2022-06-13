@@ -1,5 +1,8 @@
 package com.epam.rd.izh.entity;
 
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -19,15 +22,15 @@ public class AuthorizedUser {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "customer_firstName")
+//  @Column(name = "customer_firstName")
   private String login;
 
   @NotNull
   @Column(name = "password")
   private String password;
 
-  @Column(name = "birthday")
-  private Date birthday;
+//  @Column(name = "birthday")
+//  private Date birthday;
 
 
   /**
@@ -63,13 +66,13 @@ public class AuthorizedUser {
     this.role = role;
   }
 
-  public void setBirthday(Date birthday) {
-    this.birthday = birthday;
-  }
+//  public void setBirthday(Date birthday) {
+//    this.birthday = birthday;
+//  }
 
-  public Date getBirthday() {
-    return birthday;
-  }
+//  public Date getBirthday() {
+//    return birthday;
+//  }
 
   /**
    * Ниже представлена простая реализация паттерна builder;
@@ -92,9 +95,9 @@ public class AuthorizedUser {
     return this;
   }
 
-  public AuthorizedUser birthday(Date date) {
-    this.setBirthday(date);
-    return this;
-  }
+//  public AuthorizedUser birthday(Date date) {
+//    this.setBirthday(date);
+//    return this;
+//  }
 
 }

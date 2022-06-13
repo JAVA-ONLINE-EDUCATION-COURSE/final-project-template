@@ -1,9 +1,9 @@
-/*body {*/
-/*    background: #7B82B8;*/
-/*    !*-webkit-background-size: cover;*!*/
-/*    !*background-size: cover;*!*/
-/*    font-family:sans-serif;*/
-/*}*/
+body {
+    background: #7B82B8;
+    /*-webkit-background-size: cover;*/
+    /*background-size: cover;*/
+    font-family:sans-serif;
+}
 
 .image {
     position: fixed;
@@ -14,7 +14,7 @@
     height: 100%;
 }
 
-.form {
+form {
     position: absolute;
     width: 70%;
     top: 40%;
@@ -26,7 +26,7 @@
     background: rgba(0,0,0,.7);
 }
 
-.form h1 {
+form h1 {
     margin: 30px 100px;
     text-align: center;
     padding:0;
@@ -41,7 +41,7 @@
     text-align: center;
 }
 
-.form_input input {
+.group input {
     position: center;
     margin-left: 20px;
     padding: 10px;
