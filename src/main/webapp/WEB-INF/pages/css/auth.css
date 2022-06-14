@@ -1,12 +1,19 @@
 body {
     background: #7B82B8;
-    /*-webkit-background-size: cover;*/
-    /*background-size: cover;*/
+    -webkit-background-size: cover;
+    background-size: cover;
     font-family:sans-serif;
 }
+.login_title{
+    width: 350px;
+    position:relative;
+    left: 37%;
+}
 
+.login-container {
+    display: block;
+}
 .image {
-    position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
@@ -16,12 +23,13 @@ body {
 
 form {
     position: absolute;
-    width: 70%;
-    top: 40%;
+    width: 40%;
+    height: 65%;
+    top: 10%;
     left: 15%;
     padding-top:5%;
     margin-left:25%;
-    height: 100%;
+    color:#fff;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.7);
 }
@@ -35,14 +43,14 @@ form h1 {
     text-transform: uppercase;
 }
 
-.group {
+.form_input {
     margin: 10px 10px;
     padding-right: 45px;
     text-align: center;
 }
 
-.group input {
-    position: center;
+.form_input input {
+    /*position: center;*/
     margin-left: 20px;
     padding: 10px;
     width: 100%;
@@ -52,6 +60,12 @@ form h1 {
     outline: none;
     border:1px solid #fff;
     box-sizing: border-box;
+}
+
+.registration {
+    position: absolute;
+    top: 90%;
+    left: 42%;
 }
 
 .form_input input[type="text"]:focus, .form_input input[type="password"]:focus {
@@ -70,7 +84,7 @@ form h1 {
     background: #4442db;
 }
 
-.form a {
+form a {
     display: block;
     padding: 0 0 30px;
     text-align: center;
@@ -79,7 +93,7 @@ form h1 {
     transition:.3s;
 }
 
-.form a:hover {
+form a:hover {
     color:#0fc3f5;
 }
 

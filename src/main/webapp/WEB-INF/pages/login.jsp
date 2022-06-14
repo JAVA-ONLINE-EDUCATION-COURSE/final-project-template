@@ -8,40 +8,42 @@
     <style>
         <%@include file="css/auth.css" %>
     </style>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}css/auth.css">
 </head>
 
 <body>
-<form action="login/process" method="post">
-    <p title="Login form">Sign up</p>
-    <div class="group">
-        <%--@declare id=""--%><label for="">Login</label>
-        <input name="login" />
-    </div>
+<div class = "login-container">
+<%--    <p title="Login form" class = "login_title">Sign up</p>--%>
+    <form action="login/process" method="post">
 
-    <div class="group">
-        <label for="">Password</label>
-        <input name="password" type="password" />
-<%--        <div class="error">${error_login_placeholder}</div>--%>
-    </div>
+        <div class="form_input">
+            <label for="">Login</label>
+            <input type ="text" name="login" class ="form_input"/>
+        </div>
 
-    <div class="group">
-        <label for="">Birthday</label>
-        <input name="birthday" type="date" />
-<%--        <div class="error">${error_login_placeholder}</div>--%>
-    </div>
+        <div class="form_input">
+            <label for="">Password</label>
+            <input name="password" type="password" class ="form_input" />
+            <%--        <div class="error">${error_login_placeholder}</div>--%>
+        </div>
+
+<%--        <div class="form_input">--%>
+<%--            <label for="">Birthday</label>--%>
+<%--            <input name="birthday" type="date" class = "form_input"/>--%>
+            <%--        <div class="error">${error_login_placeholder}</div>--%>
+<%--        </div>--%>
 
 
-    <div class="group">
-        <button class="button">Confirm</button>
-    </div>
-</form>
+<%--        <div class="form_input">--%>
+<%--            <input type="submit" class ="button" placeholder="Войти"/>--%>
+<%--        </div>--%>
+  </form>
 
-<form action="registration" method="get">
-    <div>
-        <button class="button">registration</button>
-    </div>
-</form>
-
-</body>
+  <form action="registration" method="get">
+     <div class="form_input">
+        <button class="registration">registration</button>
+     </div>
+  </form>
+<%--    <img class="image" src="img/intresting.jpg" alt="заставка"/>--%>
+  </div>
+  </body>
 </html>
