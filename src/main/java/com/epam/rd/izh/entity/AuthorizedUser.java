@@ -22,15 +22,26 @@ public class AuthorizedUser {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-//  @Column(name = "customer_firstName")
+  @Column(name = "customer_first_name")
   private String login;
 
   @NotNull
   @Column(name = "password")
   private String password;
 
-//  @Column(name = "birthday")
-//  private Date birthday;
+  @Column(name = "birthday")
+  private Date birthday;
+
+  @Column(name = "role")
+  private String role;
+
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
+
+  public Date getBirthday() {
+    return birthday;
+  }
 
 
   /**
@@ -40,7 +51,7 @@ public class AuthorizedUser {
    * Если роль для бизнес-логики не важна, можно задать для всех объектов 'private String role = "User"'.
    */
 
-  private String role;
+
 
   public String getLogin() {
     return login;

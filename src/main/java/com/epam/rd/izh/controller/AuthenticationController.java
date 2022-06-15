@@ -95,7 +95,16 @@ public class AuthenticationController {
      */
     return "login";
   }
-
+  /**
+   * Метод, отвечающий за логику проверки регистрации пользователя.
+   */
+   @GetMapping("/process")
+   public String process(Model model){
+     AuthorizedUser authorizedUser = new AuthorizedUser();
+     String theName = authorizedUser.getLogin();
+     model.addAttribute("user", authorizedUser);
+     return "index";
+   }
   /**
    * Метод, отвечающий за логику регистрации пользователя.
    */
