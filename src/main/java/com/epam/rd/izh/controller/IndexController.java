@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
   @GetMapping("/")
-  public String login(Authentication authentication, Model model) {
+  public String loginForm(Authentication authentication, Model model) {
     Message greetingMessage = new Message();
     greetingMessage.setMessage(ENG_GREETING + authentication.getName());
 

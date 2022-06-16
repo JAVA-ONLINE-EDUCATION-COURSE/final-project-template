@@ -1,33 +1,56 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" language="java" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+  <style>
+    <%@include file="css/auth.css" %>
+  </style>
+</head>
 
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Registration</title>
-  </head>
+<body>
+<p title="Login form" class="login_title">Sign up</p>
+<form id="registration" action="registration" method="get">
+<%--<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user"  method="post">--%>
+  <div class="form_input">
+    <label for="">Логин</label>
+    <input type="text" name="login" class="form_input" path="login"/>
+  </div>
 
-  <body>
-    <form:form action="registration/proceed" method="post" modelAttribute="registrationForm">
-      <p title="Registration form">
-        Registration
-      </p>
+  <div class="form_input">
+    <label for="">Password</label>
+    <input name="password" type="password" class="form_input" path="password"/>
+    <%--                    <div class="error">${error_login_placeholder}</div>--%>
+  </div>
 
-      <div>
-        <label title="Login">Login</label>
-        <form:input path="login" id="check_login" title="Login" />
-      </div>
+  <div class="form_input">
+    <label for="">День рождения</label>
+    <input name="birthday" type="date" class="form_input" path="birthday"/>
+    <div class="error">${error_login_placeholder}</div>
+  </div>
 
-      <div">
-        <label title="Password">Password</label>
-        <form:input path="password" id="check_password" type="password" title="Password" />
-      </div>
+  <div class="form_input">
+    <label for="">Роль</label>
+    <form:select name="role" type="text" class="form_input" path="role"/>
+    <form:option value="Custom">Custom</form:option>
+    <form:option value="Administrator">Administrator</form:option>
+    <div class="error">${error_login_placeholder}</div>
+  </div>
 
-      <div>
-        <button>Confirm</button>
-      </div>
-    </form:form>
 
-  </body>
+<%--  <div class="form_input">--%>
+<%--    <input type="submit" class="button" placeholder="Войти"/>--%>
+<%--  </div>--%>
+<%--</form>--%>
+
+
+  <div class="form_registration">
+    <button class="button" placeholder="Регистрация">Регистрация</button>
+  </div>
+</form>
+<%--    <%@ inclde  file =""img/intresting.jpg"%/>--%>
+
+</body>
 </html>
