@@ -43,6 +43,13 @@ public class AuthorizedUser {
     return birthday;
   }
 
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getId() {
+    return id;
+  }
 
   /**
    * Определяет GrantedAuthority пользователя. Может быть колелкцией, например Set<Strings> если логика приложения

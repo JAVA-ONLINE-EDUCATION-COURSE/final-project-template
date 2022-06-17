@@ -93,7 +93,7 @@ public class AuthenticationController {
      * spring.mvc.view.suffix=.jsp
      * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
      */
-    return "login";
+    return "registration";
   }
   /**
    * Метод, отвечающий за логику проверки регистрации пользователя.

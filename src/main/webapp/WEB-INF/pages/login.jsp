@@ -30,7 +30,7 @@
 </form>
 <form id="registration_login" action="registration" method="get">
 <div class="form_registration_login">
-    <button class="button_login" placeholder="Регистрация">Регистрация</button>
+    <button class="button_login">Регистрация</button>
 </div>
 </body>
 </html>
