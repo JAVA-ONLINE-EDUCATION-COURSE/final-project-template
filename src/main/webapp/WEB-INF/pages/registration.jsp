@@ -11,8 +11,8 @@
 </head>
 
 <body>
-<p title="Login form" class="login_title">Sign up</p>
-<form id="registration" action="registration" method="get">
+<p title="Login form" class="login_title">Регистрация</p>
+<form id="input" action="registration" modalAttribute="user" method="get">
 <%--<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user"  method="post">--%>
   <div class="form_input">
     <label for="">Логин</label>
@@ -33,9 +33,10 @@
 
   <div class="form_input">
     <label for="">Роль</label>
-    <form:select name="role" type="text" class="form_input" path="role"/>
-    <form:option value="Custom">Custom</form:option>
-    <form:option value="Administrator">Administrator</form:option>
+    <input name="role" class="form_input" path="role"/>
+<%--    <form:select name="role" type="text" class="form_input" path="role"/>--%>
+<%--    <form:option value="Custom">Custom</form:option>--%>
+<%--    <form:option value="Administrator">Administrator</form:option>--%>
     <div class="error">${error_login_placeholder}</div>
   </div>
 
@@ -50,7 +51,7 @@
     <button class="button" placeholder="Регистрация">Регистрация</button>
   </div>
 </form>
-<%--    <%@ inclde  file =""img/intresting.jpg"%/>--%>
+    <img src="${pageContext.request.contextPath}/img/intresting.jpg" class="image" alt="interest"/>
 
 </body>
 </html>

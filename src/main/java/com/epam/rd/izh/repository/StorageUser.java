@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StorageRepositoryUser {
+public class StorageUser {
     private static int currentId = 1;
     private static final HashMap<Integer, AuthorizedUser> users = new HashMap<>();
     private final AuthorizedUser user;
 
-    public StorageRepositoryUser(AuthorizedUser user) {
+    public StorageUser(AuthorizedUser user) {
         this.user = user;
     }
 

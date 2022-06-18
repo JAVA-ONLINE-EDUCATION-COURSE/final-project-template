@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 
@@ -76,6 +77,8 @@ public class AuthenticationController {
 
   @GetMapping("/login")
   public String login(Model model, @RequestParam(required = false) String error) {
+    AuthorizedUser user = new AuthorizedUser();
+
     if (error != null) {
       /**
        * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
@@ -93,15 +96,18 @@ public class AuthenticationController {
      * spring.mvc.view.suffix=.jsp
      * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
      */
-    return "registration";
+    model.addAttribute("user", user);
+    return "login";
   }
   /**
    * Метод, отвечающий за логику проверки регистрации пользователя.
    */
    @GetMapping("/process")
-   public String process(Model model){
+   public String process(HttpServletRequest request, Model model){
      AuthorizedUser authorizedUser = new AuthorizedUser();
-     String theName = authorizedUser.getLogin();
+     UserRepository userRepository = new UserRepository();
+     String theName = request.getParameter("login");
+     String pass = request.getParameter("password");
      model.addAttribute("user", authorizedUser);
      return "index";
    }
@@ -110,10 +116,10 @@ public class AuthenticationController {
    */
   @GetMapping("/registration")
   public String viewRegistration(Model model) {
-    if(!model.containsAttribute("registrationForm")){
-      model.addAttribute("registrationForm", new AuthorizedUser());
+    if(!model.containsAttribute("registration")){
+      model.addAttribute("registration", new AuthorizedUser());
     }
-    return "registration";
+    return "index";
   }
 
   /**

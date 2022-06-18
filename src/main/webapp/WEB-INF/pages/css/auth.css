@@ -14,7 +14,7 @@ body {
     font-size: 20px;
     text-transform: uppercase;
     left: 45%;
-    top: 15%;
+    top: 50px;
     z-index: 1;
 }
 
@@ -36,12 +36,12 @@ body {
 form#input {
     position:absolute;
     width: 40%;
-    height: 75%;
+    height: 50%;
     top: 20%;
     left: 15%;
     margin-top:10%;
-    padding-top:15%;
-    margin-left:45%;
+    padding-top:5%;
+    margin-left:35%;
     color:#fff;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.7);
@@ -134,7 +134,7 @@ form h1 {
 }
 
 .form_input input[type="submit"] {
-    margin-top: 20px;
+    margin-top: 40px;
     color: #fff;
     font-width: bold;
     text-transform: uppercase;
@@ -180,7 +180,7 @@ form a:hover {
 button.button  {
     position: absolute;
     left: 7%;
-    bottom:50%;
+    top:85%;
     margin-top: 20px;
     color: #fff;
     font-width: bold;

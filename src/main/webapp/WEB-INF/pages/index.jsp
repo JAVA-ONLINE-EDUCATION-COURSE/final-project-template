@@ -1,10 +1,10 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <<<<<<< HEAD
     <title>Гигамаркет роботов</title>
     <head>
         <meta charset="UTF-8">
@@ -26,7 +26,7 @@
             <li class="list"><a href="catalog.jsp">Каталог</a></li>
             <li class="list"><a href="index.jsp">Главная</a></li>
         </ul>
-        <img class="logo" src="img/lo_files/rob.jpeg" alt="logo_robot">
+        <img class="logo" src="{pageContext.request.contextPath}img/lo_files/rob.jpeg" alt="logo_robot">
     </div>
 <p>
     ${message}!
