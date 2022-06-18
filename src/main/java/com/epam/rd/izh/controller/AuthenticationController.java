@@ -20,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * В аргументы контроллеров, которые обрабатывают запросы, можно указать дополнительные входные параметры: Например:
@@ -31,18 +33,18 @@ import java.util.Date;
 @Controller
 public class AuthenticationController {
 
-  @Autowired
-  UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-  private UserDetailsServiceMapper userService;
+    private UserDetailsServiceMapper userService;
 
-  @Autowired
-  public void UserController(UserDetailsServiceMapper userService) {
-    this.userService = userService;
-  }
+    @Autowired
+    public void UserController(UserDetailsServiceMapper userService) {
+        this.userService = userService;
+    }
 
 //  @GetMapping(value = "/error")
 //  public String accessDenied() {
@@ -75,90 +77,104 @@ public class AuthenticationController {
 //    return "registration";
 //  }
 
-  @GetMapping("/login")
-  public String login(Model model, @RequestParam(required = false) String error) {
-    AuthorizedUser user = new AuthorizedUser();
-
-    if (error != null) {
-      /**
-       * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
-       * Добавляется String "invalid login or password!", с ключем "error_login_placeholder".
-       * При создании View шаблона плейсхолдер ${error_login_placeholder} будет заменен на переданное значение.
-       *
-       * В класс Model можно передавать любые объекты, необходимые для генерации View.
-       */
-      model.addAttribute("error_login_placeholder", "invalid login or password!");
+    @GetMapping("/login")
+    public String login(Model model, @RequestParam(required = false) String error) {
+        UserRepository userRepository = new UserRepository();
+        AuthorizedUser user = new AuthorizedUser();
+        user.setLogin("Igor");
+        user.setPassword("1234");
+        user.setRole("Custormer");
+        user.setId(2L);
+        Calendar calendar = new GregorianCalendar(1976, 02 , 12);
+        Date date = calendar.getTime();
+        user.setBirthday(date);
+        userRepository.addAuthorizedUser(user);
+        System.out.println(userRepository.getUsers().toString());
+        if (error != null) {
+            /**
+             * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
+             * Добавляется String "invalid login or password!", с ключем "error_login_placeholder".
+             * При создании View шаблона плейсхолдер ${error_login_placeholder} будет заменен на переданное значение.
+             *
+             * В класс Model можно передавать любые объекты, необходимые для генерации View.
+             */
+            model.addAttribute("error_login_placeholder", "invalid login or password!");
+        }
+        /**
+         * Контроллер возвращает String название JSP страницы.
+         * В application.properties есть следующие строки:
+         * spring.mvc.view.prefix=/WEB-INF/pages/
+         * spring.mvc.view.suffix=.jsp
+         * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
+         */
+        model.addAttribute("user", user);
+        return "login";
     }
+
     /**
-     * Контроллер возвращает String название JSP страницы.
-     * В application.properties есть следующие строки:
-     * spring.mvc.view.prefix=/WEB-INF/pages/
-     * spring.mvc.view.suffix=.jsp
-     * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
+     * Метод, отвечающий за логику проверки регистрации пользователя.
      */
-    model.addAttribute("user", user);
-    return "login";
-  }
-  /**
-   * Метод, отвечающий за логику проверки регистрации пользователя.
-   */
-   @GetMapping("/process")
-   public String process(HttpServletRequest request, Model model){
-     AuthorizedUser authorizedUser = new AuthorizedUser();
-     UserRepository userRepository = new UserRepository();
-     String theName = request.getParameter("login");
-     String pass = request.getParameter("password");
-     model.addAttribute("user", authorizedUser);
-     return "index";
-   }
-  /**
-   * Метод, отвечающий за логику регистрации пользователя.
-   */
-  @GetMapping("/registration")
-  public String viewRegistration(Model model) {
-    if(!model.containsAttribute("registration")){
-      model.addAttribute("registration", new AuthorizedUser());
+    @GetMapping("/process")
+    public String process(HttpServletRequest request, Model model) {
+        UserRepository userRepository = new UserRepository();
+        String theName = request.getParameter("login");
+        AuthorizedUser authorizedUser = userRepository.getAuthorizedUserByLogin(theName);
+        assert authorizedUser != null;
+        if (authorizedUser.getLogin().equals(theName)) {
+            System.out.println("Excelent!");
+            return "index";
+            //     model.addAttribute("user", authorizedUser);
+        }  return "registration";
     }
-    return "index";
-  }
-
-  /**
-   * Метод, отвечающий за подтверждение регистрации пользователя и сохранение данных в репозиторий или DAO.
-   */
-  @PostMapping("/registration/proceed")
-  public String processRegistration(@Valid @ModelAttribute("registrationForm") AuthorizedUser registeredUser,
-                                    BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
     /**
-     * Здесь по желанию можно добавить валидацию введенных данных на back-end слое.
-     * Для этого необходимо написать реализацию Validator.
+     * Метод, отвечающий за логику регистрации пользователя.
      */
-    //registeredUser.validate(registeredUserDto, bindingResult);
-
-    if (bindingResult.hasErrors()) {
-      //логика отображения ошибки, не является обязательной
-      //...
-      //...
-      return "redirect:/registration";
+    @GetMapping("/registration")
+    public String viewRegistration(Model model) {
+        if (!model.containsAttribute("registration")) {
+            model.addAttribute("registration", new AuthorizedUser());
+        }
+        return "index";
     }
-    /**
-     * Здесь происходит присвоение роли пользователю и шифрование пароля.
-     * Роль может быть так же определена пользователем на этапе регистрации, либо иным способов, зависящим
-     * от темы финального проекта.
-     * registeredUser может быть DTO объектом, преобразуемым в AuthorizedUser сущность в сервисе-маппере
-     * (эот сервис нужно написать самим), вместе с присвоением роли и шифрованием пароля.
-     */
-    registeredUser.setRole("User");
-    registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
 
     /**
-     * Добавление пользователя в репозиторий или в базу данных через CRUD операции DAO.
-     * Рекомендуется вынести эту логику на сервисный слой.
+     * Метод, отвечающий за подтверждение регистрации пользователя и сохранение данных в репозиторий или DAO.
      */
-    userRepository.addAuthorizedUser(registeredUser);
-    /**
-     * В случае успешной регистрации редирект можно настроить на другой энд пойнт.
-     */
-    return "redirect:/login";
-  }
+    @PostMapping("/registration/proceed")
+    public String processRegistration(@Valid @ModelAttribute("registrationForm") AuthorizedUser registeredUser,
+                                      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        /**
+         * Здесь по желанию можно добавить валидацию введенных данных на back-end слое.
+         * Для этого необходимо написать реализацию Validator.
+         */
+        //registeredUser.validate(registeredUserDto, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            //логика отображения ошибки, не является обязательной
+            //...
+            //...
+            return "redirect:/registration";
+        }
+        /**
+         * Здесь происходит присвоение роли пользователю и шифрование пароля.
+         * Роль может быть так же определена пользователем на этапе регистрации, либо иным способов, зависящим
+         * от темы финального проекта.
+         * registeredUser может быть DTO объектом, преобразуемым в AuthorizedUser сущность в сервисе-маппере
+         * (эот сервис нужно написать самим), вместе с присвоением роли и шифрованием пароля.
+         */
+        registeredUser.setRole("User");
+        registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
+
+        /**
+         * Добавление пользователя в репозиторий или в базу данных через CRUD операции DAO.
+         * Рекомендуется вынести эту логику на сервисный слой.
+         */
+        userRepository.addAuthorizedUser(registeredUser);
+        /**
+         * В случае успешной регистрации редирект можно настроить на другой энд пойнт.
+         */
+        return "redirect:/login";
+    }
 }

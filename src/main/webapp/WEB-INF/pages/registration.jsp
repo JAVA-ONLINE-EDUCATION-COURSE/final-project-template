@@ -12,7 +12,7 @@
 
 <body>
 <p title="Login form" class="login_title">Регистрация</p>
-<form id="input" action="registration" modalAttribute="user" method="get">
+<form id="input" action="${pageContext.request.contextPath}registration" modalAttribute="user" method="get">
 <%--<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user"  method="post">--%>
   <div class="form_input">
     <label for="">Логин</label>

@@ -1,4 +1,5 @@
-</html><%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+</html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -12,7 +13,7 @@
 
 <body>
 <p title="Login form" class="login_title">Вход</p>
-<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user"  method="get">
+<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user" method="get">
     <div class="form_input">
         <label for="">Логин</label>
         <input type="text" name="login" class="form_input" path="login"/>
@@ -21,7 +22,7 @@
     <div class="form_input">
         <label for="">Password</label>
         <input name="password" type="password" class="form_input" path="password"/>
-        <%--                    <div class="error">${error_login_placeholder}</div>--%>
+        <div class="error">${error_login_placeholder}</div>
     </div>
 
     <div class="form_input">
