@@ -1,10 +1,16 @@
 package com.epam.rd.izh;
 
+import com.epam.rd.izh.controller.AuthenticationController;
+import com.epam.rd.izh.entity.AuthorizedUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * <p>Класс с main методом.
@@ -19,5 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class RDIzhFinalProjectTemplate {
 	public static void main(String[] args) {
 		SpringApplication.run(RDIzhFinalProjectTemplate.class, args);
+
+
 	}
 }
