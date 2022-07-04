@@ -20,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * В аргументы контроллеров, которые обрабатывают запросы, можно указать дополнительные входные параметры: Например:
@@ -46,90 +44,20 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-//  @GetMapping(value = "/error")
-//  public String accessDenied() {
-//    return "error";
-//  }
-//
-//  @GetMapping(value = {"/", "/login"})
-//  public String home() {
-//    return "login";
-//  }
-//
-//  @GetMapping(value = "/registration")
-//  public String registrationPage() {
-//    return "registration";
-//  }
-
-//  @PostMapping(value = "/appRegistration")
-//  public String registrationUser(Model model,
-//                                 @RequestParam String username,
-//                                 @RequestParam String password,
-//                                 @RequestParam String role,
-//                                 @RequestParam Date birhday) {
-//    AuthorizedUser user = new AuthorizedUser();
-//    UserDetails flag = userService.loadUserByUsername(username);
-//    if (flag.isEnabled()) {
-//      model.addAttribute(com.epam.rd.izh.Constants.MESSAGE, com.epam.rd.izh.Constants.YOU_ARE_REGISTERED);
-//      return "login";
-//    }
-//    model.addAttribute(com.epam.rd.izh.Constants.MESSAGE, Constants.USER_EXISTS);
-//    return "registration";
-//  }
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false) String error) {
-        UserRepository userRepository = new UserRepository();
-        AuthorizedUser user = new AuthorizedUser();
-        user.setLogin("Igor");
-        user.setPassword("1234");
-        user.setRole("Custormer");
-        user.setId(2L);
-        Calendar calendar = new GregorianCalendar(1976, 02 , 12);
-        Date date = calendar.getTime();
-        user.setBirthday(date);
-        userRepository.addAuthorizedUser(user);
-        System.out.println(userRepository.getUsers().toString());
+
         if (error != null) {
-            /**
-             * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
-             * Добавляется String "invalid login or password!", с ключем "error_login_placeholder".
-             * При создании View шаблона плейсхолдер ${error_login_placeholder} будет заменен на переданное значение.
-             *
-             * В класс Model можно передавать любые объекты, необходимые для генерации View.
-             */
             model.addAttribute("error_login_placeholder", "invalid login or password!");
         }
-        /**
-         * Контроллер возвращает String название JSP страницы.
-         * В application.properties есть следующие строки:
-         * spring.mvc.view.prefix=/WEB-INF/pages/
-         * spring.mvc.view.suffix=.jsp
-         * Spring MVC, используя суффикс и префикс, создаст итоговый путь к JSP: /WEB-INF/pages/login.jsp
-         */
-        model.addAttribute("user", user);
         return "login";
     }
 
     /**
      * Метод, отвечающий за логику проверки регистрации пользователя.
      */
-    @GetMapping("/process")
-    public String process(HttpServletRequest request, Model model) {
-        UserRepository userRepository = new UserRepository();
-        String theName = request.getParameter("login");
-        AuthorizedUser authorizedUser = userRepository.getAuthorizedUserByLogin(theName);
-        assert authorizedUser != null;
-        if (authorizedUser.getLogin().equals(theName)) {
-            System.out.println("Excelent!");
-            return "index";
-            //     model.addAttribute("user", authorizedUser);
-        }  return "registration";
-    }
 
-    /**
-     * Метод, отвечающий за логику регистрации пользователя.
-     */
     @GetMapping("/registration")
     public String viewRegistration(Model model) {
         if (!model.containsAttribute("registration")) {

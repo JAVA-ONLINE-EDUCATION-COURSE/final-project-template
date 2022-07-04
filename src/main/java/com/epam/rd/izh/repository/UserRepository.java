@@ -47,8 +47,4 @@ public class UserRepository {
     }
     return false;
   }
-
-  public List<AuthorizedUser> getUsers() {
-    return users;
-  }
 }

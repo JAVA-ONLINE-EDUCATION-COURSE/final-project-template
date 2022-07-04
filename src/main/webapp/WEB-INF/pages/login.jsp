@@ -13,7 +13,7 @@
 
 <body>
 <p title="Login form" class="login_title">Вход</p>
-<form id="input" action="${pageContext.request.contextPath}/login/process" modalAttribute="user" method="get">
+<form id="input" action="${pageContext.request.contextPath}/process" modalAttribute="user" method="get">
     <div class="form_input">
         <label for="">Логин</label>
         <input type="text" name="login" class="form_input" path="login"/>
@@ -21,7 +21,7 @@
 
     <div class="form_input">
         <label for="">Password</label>
-        <input name="password" type="password" class="form_input" path="password"/>
+        <input name="password" type="text" class="form_input" path="password"/>
         <div class="error">${error_login_placeholder}</div>
     </div>
 
